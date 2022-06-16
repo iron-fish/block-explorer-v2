@@ -11,16 +11,18 @@ import {
   Badge,
   Center,
 } from '@ironfish/ui-kit'
+import Link from 'next/link'
 
 import { IronFishLogo, OuterReferenceIcon } from 'svgx'
 import { NavSearch } from 'components'
 import NavMenu from './NavMenu'
 import NavListOfLinks from './NavListOfLinks'
-import Link from 'next/link'
 import RoutePaths from 'constants/RoutePaths'
 import useNodeVersion from 'hooks/useNodeVersion'
+import { useTranslation } from 'hooks/useTranslation'
 
 const NodeVersionButton: FC<StyleProps> = (props: StyleProps) => {
+  const { t } = useTranslation('c-navbar')
   const { loaded, data, error } = useNodeVersion()
 
   const spinAnimation = useColorModeValue(
@@ -60,7 +62,9 @@ const NodeVersionButton: FC<StyleProps> = (props: StyleProps) => {
       >
         {loaded ? (
           <Center>
-            <h5>Node {data.ironfish.version}</h5>
+            <h5>
+              {t('info-client')} {data.ironfish.version}
+            </h5>
             <OuterReferenceIcon ml="0.5rem" mb="0.1rem" />
           </Center>
         ) : (
